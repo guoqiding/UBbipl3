@@ -1,0 +1,15 @@
+Package: UBbipl
+Type: Package
+Title: UNDERSTANDING BIPLOTS: DATA SETS AND FUNCTIONS
+Version: 3.0.4
+Date: 2013-10-13
+Author: Niel le Roux and Sugnet Lubbe
+Maintainer: Niel le Roux <njlr@sun.ac.za>
+Description: Package consisting of all data sets and functions discussed in Understanding Biplots.
+Depends: R (>= 3.0.0), rgl, MASS, numDeriv
+License: AGPL-3
+LazyLoad: yes
+LazyData: yes
+URL: http://www.wiley.com/go/biplots
+BugReports: njlr@sun.ac.za
+Packaged: 2013-10-13 10:50:34 UTC; NJ le Roux
