@@ -1,4 +1,4 @@
-drawbipl.bagalpha <-
+drawbipl.bagalpha <- 
 function (Z, z.axes, z.axes.names = NULL, p, ax = NULL, ax.col, 
     ax.name.col, ax.name.size, alpha = 0.5, basket.beta = 0.5, 
     basket.n = 36, pch.samples.size = 1, c.hull.n = 10, class.vec, 
@@ -9,7 +9,8 @@ function (Z, z.axes, z.axes.names = NULL, p, ax = NULL, ax.col,
     pch.means = 15, pch.means.size = 1, pos, pos.m, predictions.mean = NULL, 
     predictions.sample = NULL, ort.lty = 1, side.label, specify.bags, 
     specify.beta.baskets, specify.classes, specify.ellipses = NULL, 
-    strepie = c(1, 1), Title = NULL, Tukey.median = TRUE, Z.means.mat, 
+    strepie = c(1, 1), Title = NULL, Tukey.median = TRUE, Z.means.mat,
+    predictions.allsamples.onaxis = NULL, 
     ...) 
 {
     if (!is.null(Z.means.mat) & ncol(Z.means.mat) == 5) 
@@ -19,6 +20,7 @@ function (Z, z.axes, z.axes.names = NULL, p, ax = NULL, ax.col,
         p, ax, ax.col, ax.name.col, ax.name.size, markers, usr, 
         label, label.size, marker.size, offset, offset.m, pos, 
         pos.m, side.label, strepie, predictions.sample, predictions.mean, 
+        predictions.allsamples.onaxis, 
         ort.lty) {
         if (is.null(ax)) 
             axes <- NULL
@@ -34,6 +36,13 @@ function (Z, z.axes, z.axes.names = NULL, p, ax = NULL, ax.col,
                 ncol = length(predictions.mean)))
             dimnames(predictions) <- list(1:nrow(predictions), 
                 paste("m", predictions.mean, sep = ""))
+        }
+        if (!is.null(predictions.allsamples.onaxis)) {
+            if (!is.null(predictions.sample)) 
+                stop("Argument predictions.sample must be set to NULL for option to predict all samples on a specified axis \n")
+            predictions <- data.frame(matrix(NA, nrow = 1, ncol = nrow(Z)))
+            rownames(predictions) <- z.axes.names[predictions.allsamples.onaxis]
+		    colnames(predictions) <- rownames(Z)
         }
         r.names <- NULL
         for (i in axes) {
@@ -89,6 +98,18 @@ function (Z, z.axes, z.axes.names = NULL, p, ax = NULL, ax.col,
                     val2 = tick.labels[length(x.invals)], px = Z[ss, 
                       1], py = Z[ss, 2], ort.lty = ort.lty), 
                     digits = 4)
+                }
+            }
+            if (!is.null(predictions.allsamples.onaxis)) {
+                if (i == predictions.allsamples.onaxis) {
+                    for (jj in 1:nrow(Z)) {
+                      predictions[1, jj] <- round(DrawOrthogline(x1 = x.invals[1], 
+                        y1 = y.invals[1], x2 = x.invals[length(x.invals)], 
+                        y2 = y.invals[length(y.invals)], 
+                        val1 = tick.labels[1], val2 = tick.labels[length(x.invals)], 
+                        px = Z[jj, 1], py = Z[jj, 
+                          2], ort.lty = ort.lty), digits = 6)
+                    }
                 }
             }
             if (!is.null(predictions.mean)) {
@@ -365,6 +386,7 @@ function (Z, z.axes, z.axes.names = NULL, p, ax = NULL, ax.col,
             offset = offset, offset.m = offset.m, pos = pos, 
             pos.m = pos.m, side.label = side.label, strepie = strepie, 
             predictions.sample = NULL, predictions.mean = predictions.mean, 
+            predictions.allsamples.onaxis = NULL, 
             ort.lty = ort.lty)
         warning("When means are plotted on a large scale graph no bags or samples are plotted\n")
     }
@@ -386,6 +408,7 @@ function (Z, z.axes, z.axes.names = NULL, p, ax = NULL, ax.col,
             offset = offset, offset.m = offset.m, pos = pos, 
             pos.m = pos.m, side.label = side.label, strepie = strepie, 
             predictions.sample = predictions.sample, predictions.mean = predictions.mean, 
+            predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
             ort.lty = ort.lty)
     }
     if (means.plot == FALSE & large.scale == FALSE) {
@@ -402,6 +425,7 @@ function (Z, z.axes, z.axes.names = NULL, p, ax = NULL, ax.col,
             offset = offset, offset.m = offset.m, pos = pos, 
             pos.m = pos.m, side.label = side.label, strepie = strepie, 
             predictions.sample = predictions.sample, predictions.mean = NULL, 
+            predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
             ort.lty = ort.lty)
     }
     if (!is.null(specify.classes)) 
