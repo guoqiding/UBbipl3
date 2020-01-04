@@ -1,10 +1,10 @@
-drawbipl.ca <-
+drawbipl.ca <- 
 function (row.plot.coords.mat, calibrations.list, ax, axes.names = NULL, 
     ax.name.size = 0.5, axis.col = "grey", ax.name.col = "grey", 
     constant, line.length = c(1, 1), markers = TRUE, marker.size = 0.5, 
     marker.col = "grey", offset, offset.m, ort.lty, pos, pos.m, 
     predictions.sample = NULL, propshift, side.label, tick.marker.col = "grey", 
-    q, X.new.points = NULL) 
+    q, X.new.points = NULL, predictions.allsamples.onaxis = NULL) 
 {
     for (i in 1:length(calibrations.list)) {
         if (!is.matrix(calibrations.list[[i]])) 
@@ -22,6 +22,13 @@ function (row.plot.coords.mat, calibrations.list, ax, axes.names = NULL,
             ncol = length(predictions.sample)))
         dimnames(predictions) <- list(1:nrow(predictions), paste("s", 
             predictions.sample, sep = ""))
+    }
+    if (!is.null(predictions.allsamples.onaxis)) {
+        if (!is.null(predictions.sample)) 
+            stop("Argument predictions.sample must be set to NULL for option to predict all samples on a specified axis \n")
+        predictions <- data.frame(matrix(NA, nrow = 1, ncol = nrow(row.plot.coords.mat)))
+        rownames(predictions) <- axes.names[predictions.allsamples.onaxis]
+		colnames(predictions) <- rownames(row.plot.coords.mat)
     }
     if (!is.null(X.new.points)) {
         predictions.new.points <- matrix(NA, nrow = length(axes), 
@@ -56,6 +63,18 @@ function (row.plot.coords.mat, calibrations.list, ax, axes.names = NULL,
                     2], ort.lty = ort.lty), digits = 6)
             }
         }
+        if (!is.null(predictions.allsamples.onaxis)) {
+            if (i == predictions.allsamples.onaxis) {
+                for (jj in 1:nrow(row.plot.coords.mat)) {
+                  predictions[1, jj] <- round(DrawOrthogline(x1 = calibrations.x.in[1], 
+                    y1 = calibrations.y.in[1], x2 = calibrations.x.in[length(calibrations.x.in)], 
+                    y2 = calibrations.y.in[length(calibrations.y.in)], 
+                    val1 = markers.vals.in[1], val2 = markers.vals.in[length(calibrations.x.in)], 
+                    px = row.plot.coords.mat[jj, 1], py = row.plot.coords.mat[jj, 
+                      2], ort.lty = ort.lty), digits = 6)
+                }
+            }
+        }
         if (!is.null(X.new.points)) {
             for (ss in 1:nrow(X.new.points)) {
                 predictions.new.points[i, ss] <- round(DrawOrthogline(x1 = calibrations.x.in[1], 
@@ -87,9 +106,9 @@ function (row.plot.coords.mat, calibrations.list, ax, axes.names = NULL,
             col = marker.col, pos.m = pos.m[i], offset.m = offset.m[i], 
             side.label = side.label[i])
     }
-    if (is.null(predictions.sample)) 
+    if (is.null(predictions.sample) & is.null(predictions.allsamples.onaxis)) 
         predictions <- NULL
-    if (!is.null(predictions)) {
+    if (!is.null(predictions.sample)) {
         predictions <- na.omit(predictions)
         dimnames(predictions)[[1]] <- r.names[!is.na(r.names)]
     }
