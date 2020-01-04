@@ -1,4 +1,4 @@
-cabipl <-
+cabipl <- 
 function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X), 
     ca.variant = c("PearsonResA", "PearsonResB", "IndepDev", 
         "ConRatioA", "ConRatioB", "Chisq2Rows", "Chisq2Cols", 
@@ -26,9 +26,9 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
     Titles.3d = c("", "", "x", "y", "z"), output = 1:17, X.new.pch = 1, 
     X.new.col = "blue", X.new.pch.cex = 1.5, X.new.labels = paste("np", 
         1:(length(X.new)/ncol(X)), sep = "."), X.new.labels.cex = 0.6, 
-    zoomval = NULL) 
+    zoomval = NULL, predictions.allsamples.onaxis = NULL) 
 {
-    if (!is.null(X.new)) 
+	if (!is.null(X.new)) 
         if (!(((is.vector(X.new)) | (is.matrix(X.new))) & is.numeric(X.new))) 
             stop("X.new must be a numeric vector or matrix. \n")
     X.new.pars <- list(X.new.pch, X.new.col, X.new.pch.cex, X.new.labels, 
@@ -128,6 +128,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
             pch.samples.size = row.points.size, pch.sample = pch.row.points, 
             Title = Title, specify.bags = NULL, label.size = row.points.label.size, 
             markers = FALSE, n.int = n.int, predictions.sample = predictions.sample, 
+			predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
             offset = offset, reflect = reflect, rotate.degrees = rotate.degrees)
         Quality <- out$PCA.quality
     }
@@ -258,6 +259,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q, X.new.points = points.new))
                 points(points.new, pch = X.new.pars[[1]], col = X.new.pars[[2]], 
@@ -275,6 +277,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q))
                 if (!is.null(X.new)) {
@@ -437,6 +440,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q, X.new.points = points.new))
                 points(points.new, pch = X.new.pars[[1]], col = X.new.pars[[2]], 
@@ -454,6 +458,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q))
                 if (!is.null(X.new)) {
@@ -615,6 +620,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q, X.new.points = points.new))
                 points(points.new, pch = X.new.pars[[1]], col = X.new.pars[[2]], 
@@ -632,6 +638,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q))
                 if (!is.null(X.new)) {
@@ -803,6 +810,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q, X.new.points = points.new))
                 points(points.new, pch = X.new.pars[[1]], col = X.new.pars[[2]], 
@@ -820,6 +828,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q))
                 if (!is.null(X.new)) {
@@ -1014,6 +1023,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q, X.new.points = points.new))
                 points(points.new, pch = X.new.pars[[1]], col = X.new.pars[[2]], 
@@ -1031,6 +1041,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q))
                 if (!is.null(X.new)) {
@@ -1202,6 +1213,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q, X.new.points = points.new))
                 points(points.new, pch = X.new.pars[[1]], col = X.new.pars[[2]], 
@@ -1219,6 +1231,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q))
                 if (!is.null(X.new)) {
@@ -1268,6 +1281,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                     marker.col = marker.col, offset = offset, 
                     offset.m = offset.m, ort.lty = ort.lty, pos = pos, 
                     pos.m = pos.m, propshift = propshift, predictions.sample = predictions.sample, 
+			        predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                     side.label = side.label, tick.marker.col = tick.marker.col, 
                     q = q, X.new.points = points.new))
                   points(points.new, pch = X.new.pars[[1]], col = X.new.pars[[2]], 
@@ -1285,6 +1299,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                     marker.col = marker.col, offset = offset, 
                     offset.m = offset.m, ort.lty = ort.lty, pos = pos, 
                     pos.m = pos.m, propshift = propshift, predictions.sample = predictions.sample, 
+			        predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                     side.label = side.label, tick.marker.col = tick.marker.col, 
                     q = q))
                   if (!is.null(X.new)) {
@@ -1436,6 +1451,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q, X.new.points = points.new))
                 points(points.new, pch = X.new.pars[[1]], col = X.new.pars[[2]], 
@@ -1453,6 +1469,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q))
                 if (!is.null(X.new)) {
@@ -1719,6 +1736,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q, X.new.points = points.new))
                 points(points.new, pch = X.new.pars[[1]], col = X.new.pars[[2]], 
@@ -1736,6 +1754,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q))
                 if (!is.null(X.new)) {
@@ -1896,6 +1915,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q, X.new.points = points.new))
                 points(points.new, pch = X.new.pars[[1]], col = X.new.pars[[2]], 
@@ -1913,6 +1933,7 @@ function (X = as.matrix(SACrime08.data), X.new = NULL, e.vects = 1:ncol(X),
                   marker.col = marker.col, offset = offset, offset.m = offset.m, 
                   ort.lty = ort.lty, pos = pos, pos.m = pos.m, 
                   propshift = propshift, predictions.sample = predictions.sample, 
+			      predictions.allsamples.onaxis = predictions.allsamples.onaxis, 
                   side.label = side.label, tick.marker.col = tick.marker.col, 
                   q = q))
                 if (!is.null(X.new)) {
