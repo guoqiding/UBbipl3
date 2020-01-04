@@ -1,4 +1,5 @@
-PCAbipl <- function (X = Ocotea.data[, 3:8], G = NULL, X.new.samples = NULL, 
+PCAbipl <- 
+function (X = Ocotea.data[, 3:8], G = NULL, X.new.samples = NULL, 
     X.new.vars = NULL, scaled.mat = FALSE, e.vects = 1:ncol(X), 
     dim.biplot = c(2, 1, 3), adequacies.print = FALSE, adjust.3d = c(0.5, 
         0.5), alpha = 0.95, alpha.3d = 0.7, aspect.3d = "iso", 
